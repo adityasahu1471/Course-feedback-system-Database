@@ -1,0 +1,170 @@
+{
+  "input": "C:\\Users\\Aditya\\Downloads\\04. Project Report.docx",
+  "fonts_by_char_count": {
+    "Times New Roman": 4516
+  },
+  "direct_run_formatting_runs": 132,
+  "direct_paragraph_formatting_paragraphs": 23,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 1,
+      "text": "23CSE202 DATABASE MANAGEMENT SYSTEMS",
+      "style": "Normal"
+    },
+    {
+      "para_index": 2,
+      "text": "S3\u00a0B.Tech\u00a0CSE",
+      "style": "Normal"
+    },
+    {
+      "para_index": 3,
+      "text": "Department of Computer Science and Engineering",
+      "style": "Normal"
+    },
+    {
+      "para_index": 4,
+      "text": "Amrita School of Computing,\u00a0Amritapuri\u00a0Campus",
+      "style": "Normal"
+    },
+    {
+      "para_index": 6,
+      "text": "PROJECT REPORT",
+      "style": "Normal"
+    },
+    {
+      "para_index": 15,
+      "text": "CONTENTS",
+      "style": "Normal"
+    },
+    {
+      "para_index": 26,
+      "text": "What is Expected in each chapter",
+      "style": "Normal"
+    },
+    {
+      "para_index": 27,
+      "text": "1. Abstract (1 paragraph)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 29,
+      "text": "2. Introduction (1-2 pages)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 31,
+      "text": "3. Requirements (Functional & Non-functional) (1 page)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 35,
+      "text": "4. UI Design (2-3 pages)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 37,
+      "text": "5. Database Design ",
+      "style": "Normal"
+    },
+    {
+      "para_index": 40,
+      "text": "6. Database Selection & Justification",
+      "style": "Normal"
+    },
+    {
+      "para_index": 42,
+      "text": "7. Implementation",
+      "style": "Normal"
+    },
+    {
+      "para_index": 45,
+      "text": "8. Testing & Validation",
+      "style": "Normal"
+    },
+    {
+      "para_index": 48,
+      "text": "9. Results & Screenshots",
+      "style": "Normal"
+    },
+    {
+      "para_index": 51,
+      "text": "10. Challenges Faced & Solutions",
+      "style": "Normal"
+    },
+    {
+      "para_index": 54,
+      "text": "11. Conclusion & Future Enhancements",
+      "style": "Normal"
+    },
+    {
+      "para_index": 57,
+      "text": "References",
+      "style": "Normal"
+    },
+    {
+      "para_index": 70,
+      "text": "Sl. No",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "23CSE202 DATABASE MANAGEMENT SYSTEMS",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "text": "S3\u00a0B.Tech\u00a0CSE",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": "Department of Computer Science and Engineering",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": "Amrita School of Computing,\u00a0Amritapuri\u00a0Campus",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "text": "",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "23CSE202 DATABASE MANAGEMENT SYSTEMS",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "run_text": "S",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "run_text": "3",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "run_text": "\u00a0",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "run_text": "B.Tech",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

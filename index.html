@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback Hub | Course Feedback System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section id="login-screen" class="screen login-screen">
+      <div class="login-shell">
+        <aside class="brand-panel">
+          <div class="rating-dots" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="brand-top">
+            <p class="eyebrow">Course Feedback System</p>
+            <h1>Feedback<br />Hub</h1>
+            <p class="brand-copy">
+              A clean prototype for students to submit course feedback and
+              administrators to review course performance.
+            </p>
+          </div>
+
+          <div class="metrics compact" id="login-metrics"></div>
+
+          <div class="demo-note">
+            <span class="status-dot"></span>
+            UI preview &mdash; built with vanilla HTML, CSS &amp; JavaScript.
+            Database layer connects later.
+          </div>
+        </aside>
+
+        <main class="login-card">
+          <div class="section-heading">
+            <p class="eyebrow">Sign in</p>
+            <h2>Welcome back</h2>
+            <p>Choose a role and use the demo account details.</p>
+          </div>
+
+          <div class="role-toggle" role="tablist" aria-label="Login role">
+            <button class="role-btn active" data-role="student" type="button">
+              Student
+            </button>
+            <button class="role-btn" data-role="admin" type="button">
+              Admin
+            </button>
+          </div>
+
+          <form id="login-form" class="stack">
+            <div class="field">
+              <label id="id-label" for="login-id">Student ID</label>
+              <input
+                id="login-id"
+                type="text"
+                placeholder="AM.SC.U4CSE25018"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="field">
+              <label id="secret-label" for="login-secret">Full name</label>
+              <input
+                id="login-secret"
+                type="text"
+                placeholder="Aditya Sahu"
+                autocomplete="off"
+              />
+            </div>
+
+            <p class="hint" id="login-help">
+              Student demo: <strong>AM.SC.U4CSE25018</strong> / Aditya Sahu
+              &middot; Admin demo: <strong>admin@amrita.edu</strong> / admin123
+            </p>
+            <p class="message" id="login-message"></p>
+
+            <button type="submit" class="btn primary full">Login</button>
+          </form>
+        </main>
+      </div>
+    </section>
+
+    <section id="student-screen" class="screen app-screen hidden">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Student Portal</p>
+          <h2 id="student-header-name">Student</h2>
+        </div>
+        <button class="btn ghost" id="student-logout">Logout</button>
+      </header>
+
+      <div class="app-layout">
+        <nav class="sidebar" aria-label="Student navigation">
+          <div class="sidebar-brand">
+            <span class="brand-mark">FH</span>
+            <div>
+              <strong>Feedback Hub</strong>
+              <span id="student-sidebar-id">Student</span>
+            </div>
+          </div>
+          <button class="nav-btn active" data-view="submit" type="button">
+            Submit Feedback
+          </button>
+          <button class="nav-btn" data-view="history" type="button">
+            My Feedbacks
+          </button>
+          <button class="nav-btn" data-view="profile" type="button">
+            Profile
+          </button>
+        </nav>
+
+        <main class="content-area">
+          <section class="view" data-view="submit">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Feedback Form</p>
+                <h2>Submit Course Feedback</h2>
+              </div>
+              <span class="pill">1&ndash;5 rating scale</span>
+            </div>
+
+            <div class="surface form-grid">
+              <label for="feedback-course">Course</label>
+              <select id="feedback-course"></select>
+            </div>
+
+            <div class="surface question-card">
+              <div class="mini-heading">
+                <h3>Evaluation Questions</h3>
+                <span id="question-count"></span>
+              </div>
+              <div id="question-box"></div>
+            </div>
+
+            <div class="surface stack">
+              <label for="feedback-comment">Comments</label>
+              <textarea
+                id="feedback-comment"
+                rows="4"
+                placeholder="Write your feedback here..."
+              ></textarea>
+              <div class="actions">
+                <button
+                  class="btn primary"
+                  id="submit-feedback-btn"
+                  type="button"
+                >
+                  Submit Feedback
+                </button>
+                <span class="message" id="submit-feedback-message"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="history">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">History</p>
+                <h2>My Feedbacks</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Course</th>
+                    <th>Average</th>
+                    <th>Submitted</th>
+                    <th>Comment</th>
+                  </tr>
+                </thead>
+                <tbody id="my-feedback-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="profile">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Account</p>
+                <h2>Student Details</h2>
+              </div>
+            </div>
+            <div class="surface details" id="student-profile-details"></div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <section id="admin-screen" class="screen app-screen hidden">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Admin Dashboard</p>
+          <h2 id="admin-header-name">Course Admin</h2>
+        </div>
+        <button class="btn ghost" id="admin-logout">Logout</button>
+      </header>
+
+      <div class="app-layout">
+        <nav class="sidebar" aria-label="Admin navigation">
+          <div class="sidebar-brand">
+            <span class="brand-mark">FH</span>
+            <div>
+              <strong>Feedback Hub</strong>
+              <span id="admin-sidebar-email">admin@amrita.edu</span>
+            </div>
+          </div>
+          <button class="nav-btn active" data-view="dashboard" type="button">
+            Dashboard
+          </button>
+          <button class="nav-btn" data-view="students" type="button">
+            Students
+          </button>
+          <button class="nav-btn" data-view="faculty" type="button">
+            Faculty
+          </button>
+          <button class="nav-btn" data-view="courses" type="button">
+            Courses
+          </button>
+          <button class="nav-btn" data-view="feedback" type="button">
+            Feedback
+          </button>
+          <button class="nav-btn" data-view="reports" type="button">
+            Reports
+          </button>
+        </nav>
+
+        <main class="content-area">
+          <section class="view" data-view="dashboard">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Overview</p>
+                <h2>Course Performance</h2>
+              </div>
+              <button class="btn secondary" id="reset-demo" type="button">
+                Restore Seed Data
+              </button>
+            </div>
+
+            <div class="metrics" id="admin-metrics"></div>
+
+            <div class="dashboard-grid">
+              <div class="surface">
+                <div class="mini-heading">
+                  <h3>Average Rating By Course</h3>
+                  <span>Current semester</span>
+                </div>
+                <div id="rating-chart" class="chart"></div>
+              </div>
+
+              <div class="surface">
+                <div class="mini-heading">
+                  <h3>Recent Feedback</h3>
+                  <span id="recent-count"></span>
+                </div>
+                <div id="recent-feedback-list" class="feedback-list"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="students">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Records</p>
+                <h2>Students</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Semester</th>
+                  </tr>
+                </thead>
+                <tbody id="students-body"></tbody>
+              </table>
+            </div>
+
+            <div class="surface">
+              <div class="mini-heading">
+                <h3>Add Or Modify Student</h3>
+                <span>Student registry</span>
+              </div>
+              <div class="form-grid">
+                <label for="student-id">Student ID</label>
+                <input id="student-id" placeholder="AM.SC.U4CSE25XXX" />
+                <label for="student-name">Name</label>
+                <input id="student-name" placeholder="Student name" />
+                <label for="student-dept">Department</label>
+                <input id="student-dept" placeholder="CSE" />
+                <label for="student-sem">Semester</label>
+                <input id="student-sem" placeholder="2" inputmode="numeric" />
+              </div>
+              <div class="actions">
+                <button class="btn primary" id="student-add" type="button">
+                  Add Student
+                </button>
+                <button class="btn secondary" id="student-load" type="button">
+                  Load Selected
+                </button>
+                <button class="btn secondary" id="student-update" type="button">
+                  Update Selected
+                </button>
+                <span class="message" id="student-message"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="faculty">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Records</p>
+                <h2>Faculty</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Teacher ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                  </tr>
+                </thead>
+                <tbody id="teachers-body"></tbody>
+              </table>
+            </div>
+
+            <div class="surface">
+              <div class="mini-heading">
+                <h3>Add Or Modify Teacher</h3>
+                <span>Faculty registry</span>
+              </div>
+              <div class="form-grid">
+                <label for="teacher-id">Teacher ID</label>
+                <input id="teacher-id" placeholder="FAC004" />
+                <label for="teacher-name">Name</label>
+                <input id="teacher-name" placeholder="Teacher name" />
+                <label for="teacher-email">Email</label>
+                <input id="teacher-email" placeholder="teacher@amrita.edu" />
+                <label for="teacher-subject">Subject</label>
+                <input id="teacher-subject" placeholder="Subject" />
+              </div>
+              <div class="actions">
+                <button class="btn primary" id="teacher-add" type="button">
+                  Add Teacher
+                </button>
+                <button class="btn secondary" id="teacher-load" type="button">
+                  Load Selected
+                </button>
+                <button class="btn secondary" id="teacher-update" type="button">
+                  Update Selected
+                </button>
+                <span class="message" id="teacher-message"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="courses">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Records</p>
+                <h2>Courses</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Course Name</th>
+                    <th>Teacher</th>
+                    <th>Subject</th>
+                    <th>Average</th>
+                  </tr>
+                </thead>
+                <tbody id="courses-body"></tbody>
+              </table>
+            </div>
+
+            <div class="surface">
+              <div class="mini-heading">
+                <h3>Add Or Modify Course</h3>
+                <span>Course catalog</span>
+              </div>
+              <div class="form-grid">
+                <label for="course-code">Course code</label>
+                <input id="course-code" placeholder="23CSE111" />
+                <label for="course-name">Course name</label>
+                <input id="course-name" placeholder="Course name" />
+                <label for="course-teacher">Teacher</label>
+                <select id="course-teacher"></select>
+                <label for="course-subject">Subject</label>
+                <input id="course-subject" placeholder="Subject" />
+              </div>
+              <div class="actions">
+                <button class="btn primary" id="course-add" type="button">
+                  Add Course
+                </button>
+                <button class="btn secondary" id="course-load" type="button">
+                  Load Selected
+                </button>
+                <button class="btn secondary" id="course-update" type="button">
+                  Update Selected
+                </button>
+                <span class="message" id="course-message"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="feedback">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Results</p>
+                <h2>Feedback Summary</h2>
+              </div>
+            </div>
+            <div class="metrics" id="feedback-metrics"></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Average</th>
+                    <th>Submitted</th>
+                    <th>Comment</th>
+                  </tr>
+                </thead>
+                <tbody id="all-feedback-body"></tbody>
+              </table>
+            </div>
+
+            <div class="surface">
+              <div class="mini-heading">
+                <h3>Course Averages</h3>
+                <span>Current response data</span>
+              </div>
+              <div id="course-averages" class="average-list"></div>
+            </div>
+
+            <div class="actions">
+              <button class="btn secondary" id="feedback-refresh" type="button">
+                Refresh Results
+              </button>
+              <button class="btn primary" id="feedback-save" type="button">
+                Export Feedback
+              </button>
+              <span class="message" id="feedback-message"></span>
+            </div>
+          </section>
+
+          <section class="view hidden" data-view="reports">
+            <div class="page-title">
+              <div>
+                <p class="eyebrow">Reports</p>
+                <h2>Course Report</h2>
+              </div>
+            </div>
+            <div class="surface form-grid">
+              <label for="report-course">Course</label>
+              <select id="report-course"></select>
+            </div>
+            <div class="actions">
+              <button class="btn primary" id="report-generate" type="button">
+                Generate Report
+              </button>
+            </div>
+            <div class="surface report-output" id="report-output">
+              <p class="hint">Select a course and generate a report.</p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

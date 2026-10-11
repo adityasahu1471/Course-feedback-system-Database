@@ -1,0 +1,17 @@
+{
+  "name": "feedback-hub-dbms",
+  "version": "1.0.0",
+  "description": "Course Feedback and Faculty Evaluation System using PostgreSQL, Express, and plain HTML/CSS/JS.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:schema": "psql -d feedback_hub -f schema.sql",
+    "db:seed": "psql -d feedback_hub -f seed.sql"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
